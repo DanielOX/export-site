@@ -60,5 +60,5 @@ Route::group(['prefix' => 'admin'], function () {
     Route::post('/generalproducts/update','GeneralProductsController@update')->name('generalproducts.update');
     Route::get("/generalproducts/show",'GeneralProductsController@show')->name('generalproducts.show');
 
-
+    
 });

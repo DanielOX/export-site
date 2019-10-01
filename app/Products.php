@@ -8,7 +8,7 @@ use App\GeneralProducts;
 
 class Products extends Model
 {
-    protected $fillable = ['name','price','size','description','general_product_id'];
+    protected $fillable = ['name','price','size','description','general_product_id','quantity'];
 
     public function general_product()
     {

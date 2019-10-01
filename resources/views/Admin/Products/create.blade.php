@@ -22,7 +22,7 @@ use App\GeneralProducts;
           {{ csrf_field() }}
 
           <div class="row">
-            <div class="col-sm-3 form-group">
+            <div class="col-sm-2 form-group">
               <label for="">Product Name</label>
               <input type="text" class="form-control" name="name" placeholder="name" required >
             </div>
@@ -33,6 +33,10 @@ use App\GeneralProducts;
               <div class="col-sm-2 form-group">
                 <label for="">Price</label>
                 <input type="text" class="form-control" name="price" placeholder="Price (PKR)" required >
+              </div>
+              <div class="col-sm-3 form-group">
+                <label for="">Quantity</label>
+                <input type="numbser" class="form-control" name="quantity" placeholder="Quantity" required >
               </div>
               <div class="col-sm-4 form-group">
                 <label for="">Choose General Products</label>

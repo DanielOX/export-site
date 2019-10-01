@@ -1,6 +1,7 @@
 @extends('layouts.app')
 @section('content')
 
+
   <div class="container">
     <form class="" action="index.html" method="post">
       <div class="row">
@@ -60,11 +61,25 @@
           @if($package->product_ids && count(explode(',',$package->product_ids)) > 0)
           @foreach ($package->getProducts() as $gproduct)
                   <div class="ac">
-                    <a href="#" class="ac-q">{{$gproduct->sku}}</a>
-                      <div class="ac-a">
-                        <table class="table table-striped">
+                    <a class="ac-q">
+                      <table class="table table-bordered black prods_general">
+                        <thead>
+                          <td>SKU</td>
+                          <td>Description</td>
+                        </thead>
+                        <tbody>
+                          <tr >
+                            <td>{{$gproduct->sku}}</td>
+                            <td>{{$gproduct->description}}</td>
+                          </tr>
+                        </tbody>
+                      </table>
+                    </a>
+                      <div class="ac-a" style="background-color:#f5f5f5">
+                        <table class="table table-striped table-bordered">
                           <thead>
                             <th>SKU-Pack Size</th>
+                            <th>Availability</th>
                             <th>Pack Size</th>
                             <th>Price (PKR)</th>
                           </thead>
@@ -72,6 +87,14 @@
                             @foreach ($gproduct->sub_products as $sproduct)
                               <tr>
                                 <td>{{$gproduct->sku}} - {{$sproduct['size']}}</td>
+                                <td>
+                                  @if($sproduct->quantity > 0)
+                                 <i class="voyager-check-circle" style="color:green">  </i> <b>{{$sproduct->quantity}}</b> &nbsp; Avaialble For {{ \Carbon\Carbon::now()->format('d-m-Y') }}
+                                @else
+                                   <span style="color:red">&#9746	</span> Unavaialble For {{ \Carbon\Carbon::now()->format('d-m-Y') }}
+                                @endif
+
+                                </td>
                                 <td>{{$sproduct['size']}}</td>
                                 <td>{{number_format($sproduct['price'])}}</td>
                               </tr>
@@ -108,4 +131,13 @@
 
   }
   </script>
+  <style media="screen">
+    .ac>.ac-q::after{
+      content:"\26DB" !important;
+    }
+    .prods_general > * {
+      font-weight: 100;
+    }
+  </style>
+
 @endsection

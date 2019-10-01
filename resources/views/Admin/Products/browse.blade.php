@@ -18,6 +18,7 @@
         <th>Name</th>
         <th>Pack Size</th>
         <th>SKU-Pack-Size</th>
+        <th>Available Quantity</th>
         <th>Price (PKR)</th>
         <th>Action</th>
       </thead>
@@ -27,6 +28,13 @@
               <td>{{$product->name}}</td>
               <td>{{$product->size}}</td>
               <td>{{$product->general_product->sku}} - {{$product->size}}</td>
+              <td>
+                @if($product->quantity > 0)
+               <i class="voyager-check-circle" style="color:green">  </i> <b>{{$product->quantity}}</b> Avaialble For {{ \Carbon\Carbon::now()->format('d-m-Y') }}
+              @else
+                 <span style="color:red">&#9746	</span> Unavaialble For {{ \Carbon\Carbon::now()->format('d-m-Y') }}
+              @endif
+              </td>
               <td>
                 @if(is_int((int) $product->price))
                   {{ number_format($product->price) }}
