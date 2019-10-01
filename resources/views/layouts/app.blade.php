@@ -20,7 +20,7 @@
       background-color:white;
       padding:18px;
       border-radius:0px;
-      box-shadow:1px 1px 2 #ddd;
+      box-shadow: 1px 1px 10px 1px rgba(0,0,0,0.25);
       padding-left:18px;
     }
   </style>
