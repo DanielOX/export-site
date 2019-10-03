@@ -29,4 +29,14 @@ class Package extends Model
       return \App\Products::whereIn('general_product_id',$ids)->get();
     }
 
+    public function getTotalpriceAttribute()
+    {
+      $total = 0;
+      foreach ($this->getsubproducts() as $sp) {
+        $total += (float) $sp->price;
+      }
+
+      return $total;
+    }
+
 }

@@ -3,10 +3,9 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
-
 class GeneralProducts extends Model
 {
-    protected $fillable = ['sku','description'];
+    protected $fillable = ['sku','description','image'];
 
     public function sub_products()
     {

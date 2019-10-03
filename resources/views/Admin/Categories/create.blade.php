@@ -13,13 +13,22 @@
 
 @section('content')
   <div class="page-content container">
-      <form  action="{{route('category.store')}}" method="post">
+      <form  action="{{route('category.store')}}" method="post" enctype="multipart/form-data">
         {{csrf_field()}}
           <div class="row">
             <div class="col-sm-4">
+              <label for="">Category Name</label>
               <input class="form-control" placeholder="Category Name" type="text" name="name" value="">
             </div>
+
             <div class="col-sm-4">
+              <label for="">Category Image</label>
+              <input class="form-control" type="file" name="image" />
+            </div>
+
+
+            <div class="col-sm-4">
+              <br>
                 <button type="submit" class="btn btn-success">Add Category</button>
             </div>
           </div>

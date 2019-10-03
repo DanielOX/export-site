@@ -4,9 +4,11 @@ namespace App\Http\Controllers;
 
 use App\Category;
 use Illuminate\Http\Request;
-
+use App\Traits\UploadTrait;
 class CategoryController extends Controller
 {
+
+    use UploadTrait;
     /**
      * Display a listing of the resource.
      *
@@ -14,7 +16,7 @@ class CategoryController extends Controller
      */
     public function index()
     {
-        $categories = Category::paginate(50);
+        $categories = Category::orderBy('created_at','desc')->paginate(50);
         return view('Admin.Categories.browse')->with('categories',$categories);
     }
 
@@ -36,7 +38,11 @@ class CategoryController extends Controller
      */
     public function store(Request $request)
     {
-        Category::create($request->except('_token'));
+        $image = $request->file('image');
+        $file = $this->uploadOne($image,$folder="category");
+        $cat = $request->except('_token');
+        $cat['image'] = $file;
+        Category::create($cat);
         return redirect()->route('category.browse');
     }
 
@@ -59,6 +65,8 @@ class CategoryController extends Controller
      */
     public function edit(Request $request)
     {
+
+
       $category = Category::find($request->id);
       return view('Admin.Categories.edit')->with('category',$category);
     }
@@ -72,7 +80,11 @@ class CategoryController extends Controller
      */
     public function update(Request $request)
     {
-      $category = Category::where('id',$request->id)->update($request->except('_token'));
+      $image = $request->file('image');
+      $file = $this->uploadOne($image,$folder="category");
+      $cat = $request->except('_token');
+      $cat['image'] = $file;
+      $category = Category::where('id',$request->id)->update($cat);
       return redirect()->route('category.browse');
 
     }

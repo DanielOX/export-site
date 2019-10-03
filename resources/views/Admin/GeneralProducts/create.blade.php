@@ -17,7 +17,7 @@
       <h4> Add New Product  </h4>
       <hr>
 
-      <form  action="{{route('generalproducts.store')}}" method="post">
+      <form  action="{{route('generalproducts.store')}}" enctype="multipart/form-data" method="post">
           {{ csrf_field() }}
 
           <div class="row">
@@ -25,7 +25,12 @@
                 <label for="">SKU</label>
                 <input type="text" class="form-control" name="sku" placeholder="SKU" required >
               </div>
-              <div class="col-sm-8 form-group">
+              <div class="col-sm-4 form-group">
+                <label for="">General Product Image</label>
+                <input type="file" class="form-control" name="image" required />
+              </div>
+
+              <div class="col-sm-4 form-group">
                 <label for="">Description</label>
                 <textarea class="form-control" name="description" placeholder="General Product Description"  required rows="4"></textarea>
                 <button type="submit" class="btn btn-success pull-right">Add Product</button>

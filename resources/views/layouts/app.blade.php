@@ -13,15 +13,19 @@
     <link rel="stylesheet" href="{{URL::to('/css/accordion.css')}}">
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
-
+    @yield('libs')
 </head>
   <style media="screen">
     .card {
       background-color:white;
       padding:18px;
       border-radius:0px;
-      box-shadow: 1px 1px 10px 1px rgba(0,0,0,0.25);
       padding-left:18px;
+    }
+    .shadow
+    {
+      box-shadow: 1px 1px 10px 1px rgba(0,0,0,0.25);
+
     }
   </style>
 <body>

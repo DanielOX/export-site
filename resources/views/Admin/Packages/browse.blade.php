@@ -19,6 +19,9 @@
           <th>Name</th>
           <th>Package Category</th>
           <th>Action</th>
+          <th>Creation Date</th>
+          <th>Updation Date</th>
+
         </thead>
         <tbody>
           @foreach($packages as $package)
@@ -30,6 +33,13 @@
                   <a href="{{route('package.edit',['id' => $package->id])}}" class="btn btn-primary">Edit</a>
                   <a href="{{route('package.delete',['id' => $package->id])}}" class="btn btn-danger">Delete</a>
                 </td>
+                <td>
+                  {{\Carbon\Carbon::parse($package->created_at)->format('d/m/Y')}}
+                </td>
+                <td>
+                  {{\Carbon\Carbon::parse($package->updated_at)->format('d/m/Y')}}
+                </td>
+
             </tr>
           @endforeach
         </tbody>

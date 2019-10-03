@@ -7,7 +7,7 @@ use App\GeneralProducts;
 
 class Category extends Model
 {
-    protected $fillable = ['name'];
+    protected $fillable = ['name','image'];
 
     protected $guard = ['id'];
 

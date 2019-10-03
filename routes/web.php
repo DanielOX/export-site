@@ -11,9 +11,11 @@
 |
 */
 
-Route::get('/','WelcomeController@index');
-
+Route::get('/','WelcomeController@index')->name('welcome.home');
+Route::post('/','WelcomeController@search')->name('welcome.search');
+Route::get('/search/{id}/{type}','WelcomeController@search_query')->name('welcome.search.get');
 Auth::routes();
+Route::get('/home','HomeController@index')->name('home.controller');
 
 Route::get('/home', 'HomeController@index')->name('home');
 
@@ -60,5 +62,5 @@ Route::group(['prefix' => 'admin'], function () {
     Route::post('/generalproducts/update','GeneralProductsController@update')->name('generalproducts.update');
     Route::get("/generalproducts/show",'GeneralProductsController@show')->name('generalproducts.show');
 
-    
+
 });

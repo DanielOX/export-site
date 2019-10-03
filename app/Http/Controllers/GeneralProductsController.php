@@ -4,9 +4,12 @@ namespace App\Http\Controllers;
 
 use App\GeneralProducts;
 use Illuminate\Http\Request;
+use App\Traits\UploadTrait;
 
 class GeneralProductsController extends Controller
 {
+
+    use UploadTrait;
     /**
      * Display a listing of the resource.
      *
@@ -14,7 +17,7 @@ class GeneralProductsController extends Controller
      */
     public function index()
     {
-        $gprod = GeneralProducts::paginate(25);
+        $gprod = GeneralProducts::orderBy('created_at','desc')->paginate(25);
         return view('Admin.GeneralProducts.browse')->with('gproducts',$gprod);
     }
 
@@ -36,7 +39,13 @@ class GeneralProductsController extends Controller
      */
     public function store(Request $request)
     {
-        $gprod = GeneralProducts::create($request->except('_token'));
+        $image = $request->file('image');
+        $folder = "general_products";
+        $file = $this->uploadOne($image,$folder=$folder);
+        $prod = $request->except('_token');
+        $prod['image'] = $file;
+
+        $gprod = GeneralProducts::create($prod);
         return redirect()->route('generalproducts.browse');
     }
 
@@ -60,6 +69,7 @@ class GeneralProductsController extends Controller
      */
     public function edit(Request $request)
     {
+
       $gprod = GeneralProducts::find($request->id);
       return view('Admin.GeneralProducts.edit')->with('gproducts',$gprod);
     }
@@ -73,7 +83,15 @@ class GeneralProductsController extends Controller
      */
     public function update(Request $request)
     {
-       GeneralProducts::find($request->id)->update($request->except('_token'));
+
+       $image = $request->file('image');
+       $folder = "general_products";
+       $file = $this->uploadOne($image,$folder=$folder);
+       $prod = $request->except('_token');
+       $prod['image'] = $file;
+
+
+       GeneralProducts::find($request->id)->update($prod);
        $gprod = GeneralProducts::find($request->id);
        return redirect()->route('generalproducts.browse');
     }

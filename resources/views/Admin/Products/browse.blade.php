@@ -21,6 +21,8 @@
         <th>Available Quantity</th>
         <th>Price (PKR)</th>
         <th>Action</th>
+        <th>Creation Date</th>
+        <th>Updation Date</th>
       </thead>
       <tbody>
         @foreach($products as $product)
@@ -44,6 +46,13 @@
                 <a href="{{route('products.edit',['id' => $product->id])}}" class="btn btn-primary">Edit</a>
                 <a href="{{route('products.delete',['id' => $product->id])}}" class="btn btn-danger">Delete</a>
               </td>
+              <td>
+                {{\Carbon\Carbon::parse($product->created_at)->format('d/m/Y')}}
+              </td>
+              <td>
+                {{\Carbon\Carbon::parse($product->updated_at)->format('d/m/Y')}}
+              </td>
+
           </tr>
         @endforeach
       </tbody>
